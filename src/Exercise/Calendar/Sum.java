@@ -13,6 +13,8 @@ public class Sum {
 		b = Integer.parseInt(s2);
 		
 		System.out.printf("%d와 %d의 합은 %d 입니다.",a,b,a+b);
+		
+		scanner.close();
 	}
 
 }
