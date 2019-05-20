@@ -24,19 +24,35 @@ public class Calendar {
 		
 		Scanner scanner = new Scanner(System.in);
 		Calendar cal = new Calendar();
-		System.out.println("반복횟수를 입력하세요.");
-		int count = scanner.nextInt();
-		System.out.println("달을 입력하세요");
-		int[] month = new int[count];
-		for(int i=0; i<count; i++) {
-			month[i] = scanner.nextInt();			
+		
+		while(true) {
+		System.out.println("월을 입력하세요.");
+		System.out.print("> ");
+		int month = scanner.nextInt();
+		if(month == -1) {
+			break;
 		}
-		for(int i=0; i<count; i++) {
-			int result = cal.GetMaxDaysOfMonth(month[i]);
-			System.out.printf("%d월은 %d일까지 있습니다.\n\n",month[i],result);
+		if(month > 12) {
+			continue;
 		}
+		System.out.printf("%d월은 %d일까지 있습니다.\n",month,cal.GetMaxDaysOfMonth(month));
+		
+		}
+		
+		System.out.println("seeya!");
+//		System.out.println("반복횟수를 입력하세요.");
+//		int count = scanner.nextInt();
+//		System.out.println("달을 입력하세요");
+//		int[] month = new int[count];
+//		for(int i=0; i<count; i++) {
+//			month[i] = scanner.nextInt();			
+//		}
+//		for(int i=0; i<count; i++) {
+//			int result = cal.GetMaxDaysOfMonth(month[i]);
+//			System.out.printf("%d월은 %d일까지 있습니다.\n\n",month[i],result);
+//		}
 		// System.out.printf("%d월은 %d일까지 있습니다\n\n",month,result);
-		cal.PrintSampleCalendar();
+//		cal.PrintSampleCalendar();
 		scanner.close();
 		
 	}
