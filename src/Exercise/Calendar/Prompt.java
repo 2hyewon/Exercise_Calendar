@@ -12,6 +12,9 @@ public class Prompt {
 		String prom = ">";
 
 		while (true) {
+			System.out.println("\n연도를 입력하세요");
+			System.out.print(prom);
+			int year = scanner.nextInt();
 			System.out.println("\n월을 입력하세요");
 			System.out.print(prom);
 			int month = scanner.nextInt();
@@ -19,7 +22,7 @@ public class Prompt {
 				System.out.println("Seeya!");
 				break;
 			}
-			cal.PrintCalendar(month);
+			cal.PrintCalendar(year, month);
 		}
 		scanner.close();
 
