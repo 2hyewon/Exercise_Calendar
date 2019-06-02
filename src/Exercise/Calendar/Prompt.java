@@ -30,7 +30,6 @@ public class Prompt {
 		String prom = "> ";
 		int year = 2000;
 		int month = 1;
-		int weekday = 0;
 
 		while (true) {
 			System.out.println("\n연도를 입력하세요");

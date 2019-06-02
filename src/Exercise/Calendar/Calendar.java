@@ -20,32 +20,47 @@ public class Calendar {
 	}
 	
 	public int GetFirstDayOfMonth(int year, int month) {
-		int allDaysOfYears = (year-1)*365; // calculate all the days till last year (from 1/1/1 to the year before inputed)
-		int allLeapDaysOfYears = 0; // calculate all leap days (from 1/1/1 to the year inputed)
-		int allDaysOfThisYear = 0; // calculate all days of this year
-		int firstDay = 0; // define the first day of the month
+//		int allDaysOfYears = (year-1)*365; // calculate all the days till last year (from 1/1/1 to the year before inputed)
+//		int allLeapDaysOfYears = 0; // calculate all leap days (from 1/1/1 to the year inputed)
+//		int allDaysOfThisYear = 0; // calculate all days of this year
+//		int firstDay = 0; // define the first day of the month
+//		
+//		if(month>2) {
+//			allLeapDaysOfYears = (year/4) - (year/100) + (year/400);
+//		}
+//		else {
+//			allLeapDaysOfYears = (((year-1)/4) - ((year-1)/100) + ((year-1)/400));
+//		}
+//		
+//		for(int i=0; i<month-1; i++) {
+//			allDaysOfThisYear += MAX_DAYS[i];
+//		}
+//		
+//		// get it all together and find remainder 
+//		firstDay = (allDaysOfYears+allLeapDaysOfYears+allDaysOfThisYear)%7;
 		
-		if(month>2) {
-			allLeapDaysOfYears = (year/4) - (year/100) + (year/400);
+		int sYear = 1970;
+		final int S_FIRSTDAY = 4; // 1st/Jan/1970 = Thursday
+		int firstDay = 0;
+		int day_count = 0;
+		
+		for(int i = sYear; i<year; i++) {
+			day_count += isLeapYear(i) ? 366 : 365;
 		}
-		else {
-			allLeapDaysOfYears = (((year-1)/4) - ((year-1)/100) + ((year-1)/400));
+		for(int i = 1; i<month; i++) {
+			day_count += GetMaxDayOfMonth(year,i);
 		}
 		
-		for(int i=0; i<month-1; i++) {
-			allDaysOfThisYear += MAX_DAYS[i];
-		}
+		return firstDay = (day_count+S_FIRSTDAY)%7;
 		
-		// get it all together and find remainder 
-		firstDay = (allDaysOfYears+allLeapDaysOfYears+allDaysOfThisYear)%7;
-		
-		return firstDay;
+		//return firstDay;
 	}
 
 	public void PrintCalendar(int year, int month) {
 		
 		//get weekday automatically
-		int firstDay = GetFirstDayOfMonth(year,month) + 1; // since 1/1/1 is Monday, plus 1
+//		int firstDay = GetFirstDayOfMonth(year,month) + 1; // since 1/1/1 is Monday, plus 1
+		int firstDay = GetFirstDayOfMonth(year,month);
 		
 		if (month < 0 || month > 12) {
 			System.out.println("1~12까지 입력해주세요.");
