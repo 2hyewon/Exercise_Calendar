@@ -12,28 +12,57 @@ public class Calendar {
 			return false;
 	}
 
-	public int GetMaxDaysOfMonth(int year, int month) {
+	public int GetMaxDayOfMonth(int year, int month) {
 		if (isLeapYear(year)) {
 			return LEAP_MAX_DAYS[month - 1];
 		} else
 			return MAX_DAYS[month - 1];
 	}
+	
+	public int GetFirstDayOfMonth(int year, int month) {
+		int allDaysOfYears = (year-1)*365; // calculate all the days till last year (from 1/1/1 to the year before inputed)
+		int allLeapDaysOfYears = 0; // calculate all leap days (from 1/1/1 to the year inputed)
+		int allDaysOfThisYear = 0; // calculate all days of this year
+		int firstDay = 0; // define the first day of the month
+		
+		if(month>2) {
+			allLeapDaysOfYears = (year/4) - (year/100) + (year/400);
+		}
+		else {
+			allLeapDaysOfYears = (((year-1)/4) - ((year-1)/100) + ((year-1)/400));
+		}
+		
+		for(int i=0; i<month-1; i++) {
+			allDaysOfThisYear += MAX_DAYS[i];
+		}
+		
+		// get it all together and find remainder 
+		firstDay = (allDaysOfYears+allLeapDaysOfYears+allDaysOfThisYear)%7;
+		
+		return firstDay;
+	}
 
-	public void PrintCalendar(int year, int month, int weekday) {
+	public void PrintCalendar(int year, int month) {
+		
+		//get weekday automatically
+		int firstDay = GetFirstDayOfMonth(year,month) + 1; // since 1/1/1 is Monday, plus 1
+		
 		if (month < 0 || month > 12) {
 			System.out.println("1~12까지 입력해주세요.");
 			return;
 		} else {
-			int max = GetMaxDaysOfMonth(year, month);
+			int max = GetMaxDayOfMonth(year, month);
 			System.out.printf(" %4d  %3d월\n", year, month);
 			System.out.println(" SU MO TU WE TH FR SA");
 			System.out.println("------------------------");
-			for (int i = 0; i < weekday; i++) {
+			
+			//print blank space before the day 1
+			for (int i = 0; i < firstDay; i++) {
 				System.out.printf("   ");
 			}
 			for (int i = 1; i <= max; i++) {
 				System.out.printf("%3d",i);
-				if ((i+weekday) % 7 == 0) {
+				if ((i+firstDay) % 7 == 0) {
 					System.out.println();
 				}
 			}

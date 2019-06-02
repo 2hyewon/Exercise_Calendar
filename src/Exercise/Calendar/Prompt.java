@@ -39,16 +39,16 @@ public class Prompt {
 			System.out.println("\n월을 입력하세요");
 			System.out.print("MONTH" + prom);
 			month = scanner.nextInt();
-			System.out.println("\n첫번째 요일 입력하세요. SU, MO, TU, WE, TH, FR, SA");
-			System.out.print("WEEKDAY" + prom);
-			String str_weekday = scanner.next();
-			weekday = parseDay(str_weekday);
+//			System.out.println("\n첫번째 요일 입력하세요. SU, MO, TU, WE, TH, FR, SA");
+//			System.out.print("WEEKDAY" + prom);
+//			String str_weekday = scanner.next();
+//			weekday = parseDay(str_weekday);
 
 			if (month == -1) {
 				System.out.println("Seeya!");
 				break;
 			}
-			cal.PrintCalendar(year, month, weekday);
+			cal.PrintCalendar(year, month);
 		}
 		scanner.close();
 
