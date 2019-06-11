@@ -27,32 +27,36 @@ public class Prompt {
 	public void runPrompt() {
 		Scanner scanner = new Scanner(System.in);
 		Calendar cal = new Calendar();
+		Plan plan = new Plan();
 		String prom = "> ";
-
 
 		cal.PrintCurrentCalendar();
 
+		boolean isLoop = true;
 		while (true) {
-			System.out.println("\n\nSelect one : 1.input 2.get 3.remove");
+			System.out.println("\n\nSelect one : 1.input 2.get 3.remove 4.quit");
 			System.out.print(prom);
 			int selected = scanner.nextInt();
 
 			System.out.println("\n input yyyymmdd");
 			String strDate = scanner.next();
 			scanner.nextLine();
-
+			
 			switch (selected) {
 			case 1:
-				cal.PutPlan(strDate, scanner);
+				plan.PutPlan(strDate, scanner);
 				break;
 			case 2:
 				System.out.println("here's your schedule");
 				System.out.print("-> ");
-				cal.GetPlan(strDate);
+				plan.GetPlan(strDate);
 				break;
 			case 3:
-				cal.RemovePlan(strDate);
+				plan.RemovePlan(strDate);
 				System.out.println(">>>> It's removed");
+				break;
+			case 4:
+				isLoop = false;
 				break;
 			}
 		}

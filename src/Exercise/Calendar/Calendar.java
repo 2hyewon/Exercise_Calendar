@@ -1,38 +1,16 @@
 package Exercise.Calendar;
 
-import java.text.ParseException;
-
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Map;
-import java.util.Scanner;
 
 public class Calendar {
 
 	private static final int[] MAX_DAYS = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	private static final int[] LEAP_MAX_DAYS = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	Date date = new Date();
-	MultivaluedMap<Date, String> planMap;
 	//ArrayList<String> list = new ArrayList<String>();
 
 	public Calendar() {
-		planMap = new MultivaluedHashMap<Date, String>(); //생성자 호출시 초기화
-	}
-	
-	public Date strDateToKey(String strDate) {
-		Date sDate = null;
-		try {
-			sDate = new SimpleDateFormat("yyyyMMdd").parse(strDate);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return sDate;
 	}
 
 	public boolean isLeapYear(int year) {
@@ -64,23 +42,6 @@ public class Calendar {
 		}
 
 		return firstDay = (day_count + S_FIRSTDAY) % 7;
-	}
-
-	public void PutPlan(String strDate, Scanner s) {
-		System.out.println("wirte your schedule");
-		String plan = s.nextLine();		
-		Date sDate = strDateToKey(strDate);
-		planMap.add(sDate, plan);
-	}
-
-	public void GetPlan(String strDate) {
-		Date sDate = strDateToKey(strDate);
-		System.out.println(planMap.get(sDate));
-	}
-
-	public void RemovePlan(String strDate) {
-		Date sDate = strDateToKey(strDate);
-		System.out.println(planMap.remove(sDate));
 	}
 
 	public void PrintCurrentCalendar() { //Print today's calendar with a dot for today
