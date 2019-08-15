@@ -1,8 +1,11 @@
 package Exercise.Calendar;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Prompt {
+
+private static final String Scanner = null;
 
 //	public int parseDay(String weekday) {
 //		switch (weekday) {
@@ -24,68 +27,70 @@ public class Prompt {
 //		return 0;
 //	}
 
-	public void runPrompt() {
-		Scanner scanner = new Scanner(System.in);
-		Calendar cal = new Calendar();
+	public void runPrompt() throws IOException, ClassNotFoundException {
 		Plan plan = new Plan();
+		Calendar cal = new Calendar();
 		String prom = "> ";
-
 		cal.PrintCurrentCalendar();
 
 		boolean isLoop = true;
-		while (true) {
-			System.out.println("\n\nSelect one : 1.input 2.get 3.remove 4.quit");
+		while (isLoop) {
+			System.out.println("\n\nSelect one : 1.input 2.get 3.getAll 4.remove 5.quit");
 			System.out.print(prom);
+			Scanner scanner = new Scanner(System.in);
 			int selected = scanner.nextInt();
-
-			System.out.println("\n input yyyymmdd");
-			String strDate = scanner.next();
-			scanner.nextLine();
 			
 			switch (selected) {
 			case 1:
-				plan.PutPlan(strDate, scanner);
+				plan.RegisterPlan();
 				break;
 			case 2:
-				System.out.println("here's your schedule");
-				System.out.print("-> ");
-				plan.GetPlan(strDate);
+				plan.GetPlan();
 				break;
 			case 3:
-				plan.RemovePlan(strDate);
-				System.out.println(">>>> It's removed");
+				plan.GetAllPlan();
+				break;
+			case 4:
+				plan.RemovePlan();
+				break;
+			case 5:
+				isLoop = false;
+				break;
+			}
+		}
+	}
+	
+	public void runPromptWithoutCal() throws IOException, ClassNotFoundException {
+		Plan plan = new Plan();
+		String prom = "> ";
+		boolean isLoop = true;
+		while (isLoop) {
+			System.out.println("\n\nSelect one : 1.input 2.get 3.remove 4.quit");
+			System.out.print(prom);
+			Scanner scanner = new Scanner(System.in);
+			int selected = scanner.nextInt();
+			
+			switch (selected) {
+			case 1:
+				plan.RegisterPlan();
+				break;
+			case 2:
+				plan.GetPlan();
+				break;
+			case 3:
+				plan.RemovePlan();
 				break;
 			case 4:
 				isLoop = false;
 				break;
 			}
 		}
-
-//		while (true) {
-//			System.out.println("\n연도를 입력하세요");
-//			System.out.print("YEAR" + prom);
-//			year = scanner.nextInt();
-//			System.out.println("\n월을 입력하세요");
-//			System.out.print("MONTH" + prom);
-//			month = scanner.nextInt();
-////			System.out.println("\n첫번째 요일 입력하세요. SU, MO, TU, WE, TH, FR, SA");
-////			System.out.print("WEEKDAY" + prom);
-////			String str_weekday = scanner.next();
-////			weekday = parseDay(str_weekday);
-//
-//			if (month == -1) {
-//				System.out.println("Seeya!");
-//				break;
-//			}
-//			cal.PrintCalendar(year, month);
-//		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		// 셀 실행
 		Prompt p = new Prompt();
 		p.runPrompt();
-
 	}
 
 }
